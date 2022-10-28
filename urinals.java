@@ -14,7 +14,6 @@ public class urinals {
         }
     }
 
-
     public String findFileName(){
 
         String filename = "rule.txt";
