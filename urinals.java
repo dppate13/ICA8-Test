@@ -9,8 +9,46 @@ public class urinals {
 
         while(scanner.nextLine() != "-1"){
             String str = String.valueOf(scanner.hasNext());
-            System.out.println(str + "ayu");
+            //System.out.println(str + "ayu");
             goodString(str);
+        }
+    }
+
+
+    public String findFileName(){
+
+        String filename = "rule.txt";
+        File file = new File(filename);
+        int currentFile=0;
+
+        while(true)
+        {
+            if(file.exists())
+            {
+                currentFile++;
+                System.out.println(currentFile);
+                filename = filename.substring(0,4) + currentFile + ".txt";
+                file = new File(filename);
+            }
+            else
+                break;
+        }
+        return filename;
+    }
+    public void writeToFile(int maxUrinal, String filename){
+        try
+        {
+            FileWriter fileWriter = new FileWriter(filename, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            Integer input = maxUrinal;
+            bufferedWriter.write(input.toString());
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+
+        }
+        catch(IOException e)
+        {
+            System.out.println("I/O Exception!");
         }
     }
 
@@ -18,9 +56,12 @@ public class urinals {
         try {
             File myObj = new File("urinals.dat");
             Scanner myReader = new Scanner(myObj);
+            String fileName = findFileName();
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                System.out.println(countUrinals(data));
+                int maxUrinal = countUrinals(data);
+                writeToFile(maxUrinal,fileName);
+                //System.out.println(countUrinals(data));
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -28,8 +69,9 @@ public class urinals {
             e.printStackTrace();
         }
     }
+
     Boolean goodString(String str){
-     for(int i =1 ;i< str.length(); i++){
+     for(int i =1 ; i< str.length(); i++){
          if(str.charAt(i) == '1' && str.charAt(i-1) == '1'){
              return false;
          }
