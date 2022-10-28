@@ -10,10 +10,10 @@ public class urinalsTest {
     @Test
     void findFileName() {
         String getFileName = urinals.findFileName();
-        String name_init = getFileName.substring(4, 8);
+        String name_init = getFileName.substring(0, 4);
         String name_last = getFileName.substring(getFileName.lastIndexOf('.'), getFileName.length());
-        String name_digit = getFileName.substring(8, getFileName.lastIndexOf('.'));
-        int n = Integer.parseInt(name_digit);
+        String name_digit = getFileName.substring(4, getFileName.lastIndexOf('.'));
+
 
         assertAll(
                 () -> assertEquals("rule",name_init),
@@ -23,7 +23,22 @@ public class urinalsTest {
     }
 
     @Test
+
     void writeToFile() {
+        File dir = new File("/");
+        boolean flag = true;
+        String[] files = dir.list();
+        for(int i=0; i<files.length; i++) {
+            for(int j=i+1; j<files.length; j++)
+            {
+                if (files[i].equals(files[j]) && files[i].equals("urinals.dat")) {
+                    flag = false;
+                    break;
+                }
+            }
+        }
+        assertTrue(flag);
+        System.out.println(authorName + "Write File Tests --> Duplicate File => TEST SUCCESSFUL -----");
     }
 
     @Test
