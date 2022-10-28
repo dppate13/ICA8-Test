@@ -4,7 +4,7 @@ import java.io.*;
 public class urinals {
 
 
-    public void getInputKeyboard(){
+    public static void getInputKeyboard(){
         Scanner scanner = new Scanner(System.in);
 
         while(scanner.nextLine() != "-1"){
@@ -14,7 +14,7 @@ public class urinals {
         }
     }
 
-    public String findFileName(){
+    public static String findFileName(){
 
         String filename = "rule.txt";
         File file = new File(filename);
@@ -69,7 +69,7 @@ public class urinals {
         }
     }
 
-    Boolean goodString(String str){
+    public static Boolean goodString(String str){
      for(int i =1 ; i< str.length(); i++){
          if(str.charAt(i) == '1' && str.charAt(i-1) == '1'){
              return false;
@@ -78,7 +78,7 @@ public class urinals {
      return true;
     }
 
-    int countUrinals(String str){
+    public static int countUrinals(String str){
         int count = 0;
 
         if(goodString(str)){
