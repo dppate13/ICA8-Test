@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class urinals {
 
@@ -35,8 +36,18 @@ public class urinals {
     public static void main(String args[]){
         String choice;
         urinals u = new urinals();
-        System.out.println(u.goodString("11001"));
-        System.out.println(u.countUrinals("011"));
+        try {
+            File myObj = new File("urinals.dat");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                System.out.println(u.countUrinals(data));
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 }
 
